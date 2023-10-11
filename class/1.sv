@@ -13,22 +13,17 @@ module class_test;
 
 	endclass
 
-	human_class h0, h1, h2, h3, h4, h5;
+	human_class human_array[];
+	parameter HUMAN_ARRAY_SIZE = 8;
 
 	initial begin
-		h0 = new;
-		h1 = new;
-		h2 = new;
-		h3 = new;
-		h4 = new;
-		h5 = new;
+		human_array = new[HUMAN_ARRAY_SIZE];
 
-		h0.print_id();
-		h1.print_id();
-		h2.print_id();
-		h3.print_id();
-		h4.print_id();
-		h5.print_id();
+		for (int i = 0; i<HUMAN_ARRAY_SIZE; i++)
+			human_array[i] = new;
+
+		for (int i = 0; i<HUMAN_ARRAY_SIZE; i++)
+			human_array[i].print_id();
 	end
 endmodule
 
