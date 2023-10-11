@@ -1,9 +1,10 @@
 module class_test;
 	class human_class;
 		int id;
+		static int inst_cnt;
 
 		function new(int i);
-			id = i;
+			id = inst_cnt++;
 		endfunction
 
 		task print_id;
@@ -15,12 +16,12 @@ module class_test;
 	human_class h0, h1, h2, h3, h4, h5;
 
 	initial begin
-		h0 = new(0);
-		h1 = new(1);
-		h2 = new(2);
-		h3 = new(3);
-		h4 = new(4);
-		h5 = new(5);
+		h0 = new;
+		h1 = new;
+		h2 = new;
+		h3 = new;
+		h4 = new;
+		h5 = new;
 
 		h0.print_id();
 		h1.print_id();
