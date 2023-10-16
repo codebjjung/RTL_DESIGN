@@ -25,3 +25,20 @@ module alu16 (reset, a, b, alufs, alu);
 	wire [14:0] c;
 	wire aen, binv, c0;
 
+// alufs[1:0]
+//2'b00 = b
+//2'b01 = b+1
+//2'b10 = a+b
+// 2'b11 = a-b
+
+assign aen = alufs[1];
+assign binv = alufs[1:0] == 2'b11;
+assign c0 = alufs[0];
+
+alu1bit b00(.reset(reset), .a(a[0]), .b(b[0]), .aen(aen), .binv(binv), .cin(c0), .cout(c[0]), .sum(alu[0]));
+
+for (i=1; i<16; i++) begin
+alu1bit b0i(.reset(reset), .a(a[i]), .b(b[i]), .aen(aen), .binv(binv), .cin(c[i-1]), .cout(c[i-1]), .sum(alu[i-1]));
+end
+
+endmodule
