@@ -1,7 +1,7 @@
 `timescale 1ns/1ps
 
 `include "design.sv"
-//tb
+
 module tb
   #(ADDR_WIDTH = 32,
     DATA_WIDTH = 32,
@@ -57,20 +57,20 @@ module tb
     //make random data
     for (int j=0; j<16; j++) begin
       mem[j] = $urandom();
-      $display("Addr : %x / Data : %x", `BASE_ADDR+4j, mem[j]);
+      $display("Addr : %x / Data : %x", `BASE_ADDR+j, mem[j]);
     end
 
     //data write
     $display("APB data write");
     repeat (16) begin
       @(posedge clk) begin
-        paddr = #1 (`BASE_ADDR + 4i);
+        paddr = #1 (`BASE_ADDR + i);
         pwdata = #1 mem[i];
         pstrb = #1 4'b1111;
         pwrite = #1 1;
         psel = #1 1;
       end
-      $display("Addr : %x / Data : %x / Pstrb : %x / Pwrite : %x / Psel : %x", `BASE_ADDR+4i, pwdata, pstrb, pwrite, psel);
+      $display("Addr : %x / Data : %x / Pstrb : %x / Pwrite : %x / Psel : %x", `BASE_ADDR+i, pwdata, pstrb, pwrite, psel);
       @(posedge clk);
       penable = #1 1;
       repeat(3)
@@ -88,7 +88,7 @@ module tb
 
     repeat (16) begin
       @(posedge clk) begin
-        paddr = #1 (`BASE_ADDR + 4i);
+        paddr = #1 (`BASE_ADDR + i);
         pstrb = #1 4'b1111;
         pwrite = #1 0;
         psel = #1 1;
