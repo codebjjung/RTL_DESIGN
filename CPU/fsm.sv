@@ -6,3 +6,5 @@ module fsm (reset, clk, opcode, accz, acc15, asel, bsel, accce, pcce, irce, acco
    reg exft;
    reg [10:0] outs;
 
+   always @(opcode or reset or exft or accz or acc15) begin
+      if (reset) outs = {1'b0, 1'b0, 1'b1, 
