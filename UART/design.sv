@@ -231,6 +231,7 @@ always @(posedge tx_clk) begin
 end
 endmodule
 
+//rx
 module uart_rx(
    input rx_clk, rx_start,
    input rst, rx,
@@ -249,6 +250,7 @@ int bit_count = 0;
 typedef enum bit [2:0] { idle = 0, start_bit = 1, recv_data = 2, check_parity = 3, check_first_stop = 4, check_sec_stop = 5, done = 6} state_type;
 state_type state = idle, next_state = idle;
 
+//reset setting
 always @(posedge rx_clk) begin
    if(rst)
       state <= idle;
