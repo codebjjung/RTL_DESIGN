@@ -73,7 +73,7 @@ begin
       rx_clk <= 0;
    end else begin
       if(rx_count <= rx_max/2) begin
-         rx_cound <= rx_cound + 1;
+         rx_count <= rx_count + 1;
       end
       else begin
          rx_clk <= ~rx_clk;
